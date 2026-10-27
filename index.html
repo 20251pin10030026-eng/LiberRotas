@@ -1,492 +1,157 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiberRotas - Turismo, Empatia e Saúde Mental</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Phosphor Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <!-- Tailwind Configuration -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        // Paleta de cores focada em paz, esperança e empatia
-                        primary: {
-                            50: '#f0fdfa', // Soft Mint
-                            100: '#ccfbf1',
-                            500: '#14b8a6', // Teal
-                            600: '#0d9488',
-                            700: '#0f766e',
-                        },
-                        earth: {
-                            50: '#fdf8f6',
-                            100: '#f2e8e5',
-                            500: '#d97706', // Warm Amber/Earth
-                            600: '#b45309',
-                            800: '#78350f',
-                        },
-                        peace: {
-                            50: '#eff6ff', // Soft Blue
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                        },
-                        base: '#fafaf9', // Stone-50 (fundo quente e acolhedor)
-                    }
-                }
-            }
-        }
-    </script>
+    <title>LiberRotas - Projeto Interdisciplinar</title>
     <style>
-        body { background-color: #fafaf9; }
-        
-        /* Soft, organic animations */
-        .fade-in-up {
-            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
-            transform: translateY(30px);
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
         }
-        
-        .delay-100 { animation-delay: 100ms; }
-        .delay-200 { animation-delay: 200ms; }
-        .delay-300 { animation-delay: 300ms; }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
         }
-
-        /* Organic image mask for a welcoming feel */
-        .organic-shape {
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        header h1 {
+            color: #fff;
+            margin-top: 0;
+        }
+        section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+            color: #fff;
+            margin-left: 10px;
+        }
+        .status-implemented { background-color: #27ae60; }
+        .status-dev { background-color: #f39c12; }
+        .status-planned { background-color: #3498db; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .team-member {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
-<body class="font-sans text-stone-800 antialiased overflow-x-hidden">
+<body>
 
-    <!-- Navbar -->
-    <header class="fixed w-full top-0 z-50 bg-base/90 backdrop-blur-md border-b border-stone-200 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <div class="bg-primary-100 text-primary-700 p-2.5 rounded-full">
-                        <i class="ph-fill ph-plant text-2xl"></i>
-                    </div>
-                    <span class="font-bold text-2xl tracking-tight text-stone-800">Liber<span class="text-primary-600">Rotas</span></span>
-                </div>
-
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex space-x-8 items-center">
-                    <a href="#rotas" class="text-stone-600 hover:text-primary-600 font-medium transition-colors">Rotas Turísticas</a>
-                    <a href="#feiras" class="text-stone-600 hover:text-primary-600 font-medium transition-colors">Feiras Sociais</a>
-                    <a href="#saude-mental" class="text-stone-600 hover:text-primary-600 font-medium transition-colors">Saúde Mental</a>
-                    <a href="#apoie" class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-sm hover:shadow-md">
-                        Faça Parte
-                    </a>
-                </nav>
-
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-primary-600 focus:outline-none p-2">
-                        <i class="ph ph-list text-3xl" id="menu-icon"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Navigation -->
-        <div id="mobile-menu" class="hidden md:hidden bg-base border-t border-stone-200 absolute w-full shadow-lg">
-            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
-                <a href="#rotas" class="mobile-link block px-3 py-3 rounded-xl text-base font-medium text-stone-700 hover:text-primary-600 hover:bg-primary-50">Rotas Turísticas</a>
-                <a href="#feiras" class="mobile-link block px-3 py-3 rounded-xl text-base font-medium text-stone-700 hover:text-primary-600 hover:bg-primary-50">Feiras Sociais</a>
-                <a href="#saude-mental" class="mobile-link block px-3 py-3 rounded-xl text-base font-medium text-stone-700 hover:text-primary-600 hover:bg-primary-50">Saúde Mental</a>
-                <a href="#apoie" class="block px-3 py-3 mt-4 text-center rounded-xl text-base font-bold bg-primary-600 text-white hover:bg-primary-700">Faça Parte</a>
-            </div>
-        </div>
+    <header>
+        <h1>LiberRotas</h1>
+        <p><strong>Plataforma digital para a economia solidária regional e fomento do comércio local.</strong></p>
+        <p>Projeto Interdisciplinar | Gestão da Tecnologia da Informação - IFPR (Instituto Federal do Paraná)</p>
+        <p>
+            Links úteis: 
+            <a href="https://app.liberrotas.com.br" target="_blank" style="color: #ecf0f1;">App LiberRotas</a> | 
+            <a href="https://libersol.org" target="_blank" style="color: #ecf0f1;">Missão LiberSol</a>
+        </p>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-gradient-to-b from-primary-50 via-base to-base">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
-                <!-- Text Content -->
-                <div class="text-center lg:text-left fade-in-up">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-earth-100 text-earth-800 font-medium text-sm mb-6">
-                        <i class="ph-fill ph-heart text-earth-600"></i>
-                        Turismo com Propósito e Empatia
-                    </div>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-stone-900 leading-tight mb-6">
-                        Descubra o mundo, apoie pessoas e cuide de si.
-                    </h1>
-                    <p class="text-lg text-stone-600 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                        O <strong>LiberRotas</strong> conecta você a destinos turísticos solidários, feiras de apoio a pessoas em vulnerabilidade social e promove um espaço de renovação para sua saúde mental.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="#rotas" class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-full font-medium text-lg transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
-                            Explorar Rotas
-                            <i class="ph ph-arrow-right"></i>
-                        </a>
-                        <a href="#feiras" class="bg-white hover:bg-stone-50 text-stone-700 border border-stone-200 px-8 py-4 rounded-full font-medium text-lg transition-all shadow-sm flex items-center justify-center gap-2">
-                            Conhecer Feiras Sociais
-                        </a>
-                    </div>
-                </div>
+    <section id="problema">
+        <h2>Problema e Justificativa</h2>
+        <p>O comércio local e os pequenos produtores frequentemente enfrentam dificuldades em integrar-se nas cadeias económicas mais amplas e em captar incentivos institucionais de forma eficiente. O problema central consiste na ausência de uma ferramenta tecnológica que ligue o fomento institucional diretamente aos negócios regionais, evitando que o valor económico seja desviado da própria comunidade.</p>
+        <p>A criação do LiberRotas justifica-se pela necessidade de estabelecer um ciclo de economia circular, onde consumidores e comerciantes interagem de forma fluida, fortalecendo a resiliência económica local.</p>
+    </section>
 
-                <!-- Image Collage -->
-                <div class="mt-16 lg:mt-0 relative fade-in-up delay-200">
-                    <div class="relative w-full aspect-square max-w-lg mx-auto">
-                        <!-- Decorative background blob -->
-                        <div class="absolute inset-0 bg-peace-50 organic-shape scale-105 transform rotate-12 opacity-70"></div>
-                        <div class="absolute inset-0 bg-primary-100 organic-shape scale-95 transform -rotate-6"></div>
-                        
-                        <!-- Main Image -->
-                        <img src="https://placehold.co/600x600/e2e8f0/64748b?text=Comunidade+Acolhedora" alt="Comunidade e Turismo" class="absolute inset-0 w-full h-full object-cover organic-shape shadow-xl border-4 border-white">
-                        
-                        <!-- Floating Badges -->
-                        <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-lg border border-stone-100 flex items-center gap-3">
-                            <div class="bg-earth-100 p-2 rounded-full text-earth-600">
-                                <i class="ph-fill ph-hands-clapping text-xl"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm font-bold text-stone-800">Apoio Mútuo</p>
-                                <p class="text-xs text-stone-500">Comunidade unida</p>
-                            </div>
-                        </div>
-                        <div class="absolute top-10 -right-6 bg-white p-4 rounded-2xl shadow-lg border border-stone-100 flex items-center gap-3">
-                            <div class="bg-primary-100 p-2 rounded-full text-primary-600">
-                                <i class="ph-fill ph-brain text-xl"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm font-bold text-stone-800">Saúde Mental</p>
-                                <p class="text-xs text-stone-500">Paz e equilíbrio</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <section id="solucao">
+        <h2>Solução Proposta</h2>
+        <p>O LiberRotas propõe um ecossistema digital que facilita a descoberta de negócios da região e gere a distribuição e o resgate de cupons institucionais. O público-alvo abrange pequenos comerciantes, produtores locais e os consumidores da comunidade.</p>
+        <ul>
+            <li>Descoberta de negócios locais e rotas de economia solidária <span class="status-badge status-implemented">Implementada</span></li>
+            <li>Sistema de gestão e distribuição de cupons institucionais <span class="status-badge status-implemented">Implementada</span></li>
+            <li>Sincronização em tempo real de campanhas e benefícios <span class="status-badge status-dev">Em desenvolvimento</span></li>
+            <li>Painel analítico avançado para métricas de impacto económico <span class="status-badge status-planned">Planeada</span></li>
+        </ul>
+    </section>
+
+    <section id="equipa">
+        <h2>Equipa e Responsabilidades</h2>
+        <div class="team-member">
+            <div>
+                <h3>Reginaldo Camargo Pires</h3>
+                <p><strong>Responsabilidades:</strong> Desenvolvedor de Software e Arquiteto de Sistemas. Responsável pela modelação dos processos de negócio, conceção da arquitetura de dados (PostgreSQL/Redis), desenvolvimento da aplicação multiplataforma e integração de serviços Cloud.</p>
             </div>
         </div>
     </section>
 
-    <!-- Section 1: Rotas Turísticas (Impact Tourism) -->
-    <section id="rotas" class="py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-50 text-primary-600 mb-6">
-                    <i class="ph ph-map-trifold text-3xl"></i>
-                </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-stone-900 mb-6">Rotas Turísticas com Propósito</h2>
-                <p class="text-lg text-stone-600">Viaje de forma consciente. Nossas rotas são pensadas para valorizar a cultura local, gerar renda para comunidades e proporcionar experiências autênticas e enriquecedoras.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Route Card 1 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-stone-100 hover:shadow-xl transition-all duration-300 group fade-in-up delay-100">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://placehold.co/600x400/bbf7d0/166534?text=Ecoturismo" alt="Ecoturismo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold text-primary-700">Natureza</div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-xl font-bold text-stone-900 mb-3">Trilha do Refúgio Verde</h3>
-                        <p class="text-stone-600 mb-4 text-sm line-clamp-3">Uma imersão na natureza guiada por moradores locais. Toda a renda é revertida para a preservação ambiental e infraestrutura da comunidade isolada da serra.</p>
-                        <a href="#" class="text-primary-600 font-medium hover:text-primary-700 flex items-center gap-1">Ver Rota <i class="ph ph-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <!-- Route Card 2 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-stone-100 hover:shadow-xl transition-all duration-300 group fade-in-up delay-200">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://placehold.co/600x400/fed7aa/9a3412?text=Cultura+e+Artesanato" alt="Cultura e Artesanato" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold text-earth-700">Cultura Local</div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-xl font-bold text-stone-900 mb-3">Caminhos do Barro</h3>
-                        <p class="text-stone-600 mb-4 text-sm line-clamp-3">Conheça ateliês de famílias artesãs tradicionais. Compre diretamente de quem produz e participe de oficinas terapêuticas de modelagem em argila.</p>
-                        <a href="#" class="text-primary-600 font-medium hover:text-primary-700 flex items-center gap-1">Ver Rota <i class="ph ph-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <!-- Route Card 3 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-stone-100 hover:shadow-xl transition-all duration-300 group fade-in-up delay-300">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://placehold.co/600x400/bfdbfe/1e3a8a?text=Comunidade" alt="Imersão Comunitária" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold text-peace-600">Imersão</div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-xl font-bold text-stone-900 mb-3">Vivência Quilombola</h3>
-                        <p class="text-stone-600 mb-4 text-sm line-clamp-3">Dias de aprendizado sobre ancestralidade, resistência e culinária, fortalecendo a rede de apoio a mulheres líderes da comunidade local.</p>
-                        <a href="#" class="text-primary-600 font-medium hover:text-primary-700 flex items-center gap-1">Ver Rota <i class="ph ph-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
+    <section id="demonstracao">
+        <h2>Demonstração</h2>
+        <p>Abaixo encontram-se representações do fluxo de uso da plataforma (Adicionar imagens/capturas de ecrã reais do projeto conforme necessário):</p>
+        <div style="border: 1px dashed #ccc; padding: 40px; text-align: center; color: #7f8c8d; margin-bottom: 10px;">
+            [Espaço reservado para captura de ecrã da Interface React/Expo]
         </div>
+        <p>Aceda à versão atual publicada em: <a href="https://app.liberrotas.com.br" target="_blank">app.liberrotas.com.br</a></p>
     </section>
 
-    <!-- Section 2: Feiras Sociais -->
-    <section id="feiras" class="py-24 bg-earth-50 rounded-[3rem] mx-4 sm:mx-6 lg:mx-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:flex lg:items-center lg:justify-between mb-16 fade-in-up">
-                <div class="max-w-2xl">
-                    <h2 class="text-3xl md:text-4xl font-bold text-stone-900 mb-4">Feiras Sociais e Solidárias</h2>
-                    <p class="text-lg text-stone-600">Descubra eventos onde seu consumo faz a diferença. Feiras dedicadas a apoiar pessoas em vulnerabilidade, artesãos, refugiados e pequenos produtores.</p>
-                </div>
-                <div class="mt-6 lg:mt-0">
-                    <a href="#" class="bg-earth-600 hover:bg-earth-700 text-white px-6 py-3 rounded-full font-medium transition-all inline-flex items-center gap-2">
-                        <i class="ph ph-calendar-plus text-xl"></i> Cadastrar uma Feira
-                    </a>
-                </div>
-            </div>
-
-            <div class="space-y-6">
-                <!-- Event 1 -->
-                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-stone-100 flex flex-col sm:flex-row gap-6 items-center hover:shadow-md transition-shadow fade-in-up delay-100">
-                    <div class="flex-shrink-0 w-24 h-24 bg-earth-100 text-earth-700 rounded-2xl flex flex-col items-center justify-center font-bold text-xl">
-                        <span class="text-sm font-medium uppercase text-earth-600">Nov</span>
-                        <span>15</span>
-                    </div>
-                    <div class="flex-1 text-center sm:text-left">
-                        <div class="flex items-center justify-center sm:justify-start gap-2 mb-2">
-                            <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-0.5 rounded-full">Apoio a Refugiados</span>
-                            <span class="text-stone-500 text-sm flex items-center gap-1"><i class="ph ph-clock"></i> 09:00 - 18:00</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-stone-900 mb-2">Feira Sabores do Mundo</h3>
-                        <p class="text-stone-600 text-sm mb-4">Gastronomia e artesanato feito por famílias em situação de refúgio. Todo o lucro é revertido para o recomeço digno destas famílias.</p>
-                        <p class="text-sm font-medium text-stone-800 flex items-center justify-center sm:justify-start gap-1">
-                            <i class="ph-fill ph-map-pin text-primary-500"></i> Praça da Paz, Centro
-                        </p>
-                    </div>
-                    <div class="flex-shrink-0 w-full sm:w-auto">
-                        <a href="#" class="block text-center bg-stone-100 hover:bg-stone-200 text-stone-800 px-6 py-3 rounded-xl font-medium transition-colors">Ver Detalhes</a>
-                    </div>
-                </div>
-
-                <!-- Event 2 -->
-                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-stone-100 flex flex-col sm:flex-row gap-6 items-center hover:shadow-md transition-shadow fade-in-up delay-200">
-                    <div class="flex-shrink-0 w-24 h-24 bg-primary-100 text-primary-700 rounded-2xl flex flex-col items-center justify-center font-bold text-xl">
-                        <span class="text-sm font-medium uppercase text-primary-600">Nov</span>
-                        <span>22</span>
-                    </div>
-                    <div class="flex-1 text-center sm:text-left">
-                        <div class="flex items-center justify-center sm:justify-start gap-2 mb-2">
-                            <span class="bg-green-100 text-green-700 text-xs font-bold px-2.5 py-0.5 rounded-full">Recuperação Social</span>
-                            <span class="text-stone-500 text-sm flex items-center gap-1"><i class="ph ph-clock"></i> 10:00 - 17:00</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-stone-900 mb-2">Bazar Renascer (Edição Primavera)</h3>
-                        <p class="text-stone-600 text-sm mb-4">Roupas, móveis restaurados e arte feitos por pessoas em situação de rua que estão em processo de ressocialização assistida.</p>
-                        <p class="text-sm font-medium text-stone-800 flex items-center justify-center sm:justify-start gap-1">
-                            <i class="ph-fill ph-map-pin text-primary-500"></i> Galpão Solidário, Zona Sul
-                        </p>
-                    </div>
-                    <div class="flex-shrink-0 w-full sm:w-auto">
-                        <a href="#" class="block text-center bg-stone-100 hover:bg-stone-200 text-stone-800 px-6 py-3 rounded-xl font-medium transition-colors">Ver Detalhes</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-10">
-                <a href="#" class="text-primary-600 font-semibold hover:text-primary-700 border-b-2 border-transparent hover:border-primary-600 pb-1 transition-all">Ver calendário completo</a>
-            </div>
-        </div>
+    <section id="tecnologias">
+        <h2>Tecnologias Utilizadas e Documentação Técnica</h2>
+        <p>A plataforma adota uma arquitetura focada na escalabilidade e na reatividade de dados. O ecossistema é mantido pelas seguintes ferramentas:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tecnologia</th>
+                    <th>Finalidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>React / Expo</strong></td>
+                    <td>Estrutura e desenvolvimento do frontend da aplicação multiplataforma.</td>
+                </tr>
+                <tr>
+                    <td><strong>Firebase / Firestore</strong></td>
+                    <td>Sincronização de dados em tempo real e reatividade da interface.</td>
+                </tr>
+                <tr>
+                    <td><strong>PostgreSQL</strong></td>
+                    <td>Armazenamento relacional, assegurando a integridade nas transações e cadastros complexos.</td>
+                </tr>
+                <tr>
+                    <td><strong>Redis</strong></td>
+                    <td>Gestão de cache de alta velocidade para otimização do acesso a dados recorrentes.</td>
+                </tr>
+            </tbody>
+        </table>
     </section>
 
-    <!-- Section 3: Saúde Mental (Mental Health) -->
-    <section id="saude-mental" class="py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
-                <!-- Image/Visual -->
-                <div class="order-2 lg:order-1 mt-16 lg:mt-0 relative fade-in-up">
-                    <div class="relative w-full rounded-3xl overflow-hidden shadow-2xl">
-                        <img src="https://placehold.co/800x600/f0fdfa/0f766e?text=Saúde+Mental+e+Comunidade" alt="Pessoas conversando e sorrindo" class="w-full h-auto object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-stone-900/60 to-transparent flex items-end p-8">
-                            <blockquote class="text-white">
-                                <p class="text-xl font-medium italic mb-4">"Encontrar propósito em ajudar o outro e se reconectar com o mundo foi a viagem mais terapêutica que já fiz."</p>
-                                <footer>— Maria Silva, Viajante Voluntária</footer>
-                            </blockquote>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Text Content -->
-                <div class="order-1 lg:order-2 fade-in-up delay-100">
-                    <div class="inline-flex items-center gap-2 text-primary-600 font-semibold mb-4">
-                        <i class="ph-fill ph-brain text-2xl"></i>
-                        Bem-estar Psicológico
-                    </div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-stone-900 mb-6">A cura através do encontro e do afeto.</h2>
-                    <p class="text-lg text-stone-600 mb-6 leading-relaxed">
-                        Acreditamos que a saúde mental se fortalece na coletividade. O isolamento adoece, mas o sentimento de pertencimento, o contato com a natureza e o altruísmo são poderosos agentes terapêuticos.
-                    </p>
-                    
-                    <ul class="space-y-6 mt-8">
-                        <li class="flex items-start gap-4">
-                            <div class="bg-peace-100 p-3 rounded-full text-peace-600 shrink-0">
-                                <i class="ph-fill ph-users-three text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-stone-900 text-lg">Sentimento de Pertencimento</h4>
-                                <p class="text-stone-600 text-sm mt-1">Nossas rotas e feiras criam espaços seguros para trocas humanas genuínas, combatendo a solidão.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="bg-primary-100 p-3 rounded-full text-primary-600 shrink-0">
-                                <i class="ph-fill ph-tree text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-stone-900 text-lg">Turismo Terapêutico</h4>
-                                <p class="text-stone-600 text-sm mt-1">Respire ar puro, desacelere a mente e viva o momento presente através das nossas rotas ecológicas.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="bg-earth-100 p-3 rounded-full text-earth-600 shrink-0">
-                                <i class="ph-fill ph-hand-heart text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-stone-900 text-lg">O Poder do Propósito</h4>
-                                <p class="text-stone-600 text-sm mt-1">Ajudar quem está em vulnerabilidade traz significado para a vida, elevando a autoestima e a esperança.</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="py-20 bg-primary-700 text-center relative overflow-hidden mx-4 sm:mx-6 lg:mx-8 rounded-3xl mb-12">
-        <!-- Soft background pattern -->
-        <div class="absolute inset-0 opacity-10 mix-blend-overlay">
-            <div class="absolute top-0 -left-20 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl"></div>
-            <div class="absolute bottom-0 -right-20 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl"></div>
-        </div>
-
-        <div class="relative z-10 max-w-3xl mx-auto px-4">
-            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Pronto para iniciar sua jornada de impacto?</h2>
-            <p class="text-xl text-primary-100 mb-10">Junte-se a nós. Planeje sua próxima rota solidária ou encontre uma feira social perto de você neste fim de semana.</p>
-            <a href="#apoie" class="inline-block bg-white text-primary-700 hover:bg-stone-50 px-10 py-4 rounded-full font-bold text-lg transition-all shadow-lg transform hover:-translate-y-1">
-                Fazer Parte do Movimento
-            </a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-stone-900 text-stone-300 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8">
-                <!-- Brand Column -->
-                <div class="col-span-1 md:col-span-1">
-                    <div class="flex items-center gap-2 mb-4">
-                        <i class="ph-fill ph-plant text-2xl text-primary-500"></i>
-                        <span class="font-bold text-2xl text-white">LiberRotas</span>
-                    </div>
-                    <p class="text-sm text-stone-400 mb-6">
-                        Conectando pessoas através do turismo com propósito, solidariedade e empatia pela saúde mental coletiva.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="bg-stone-800 p-2 rounded-full text-stone-400 hover:text-white hover:bg-primary-600 transition-colors"><i class="ph ph-instagram-logo text-xl"></i></a>
-                        <a href="#" class="bg-stone-800 p-2 rounded-full text-stone-400 hover:text-white hover:bg-primary-600 transition-colors"><i class="ph ph-facebook-logo text-xl"></i></a>
-                        <a href="#" class="bg-stone-800 p-2 rounded-full text-stone-400 hover:text-white hover:bg-primary-600 transition-colors"><i class="ph ph-envelope-simple text-xl"></i></a>
-                    </div>
-                </div>
-
-                <!-- Links 1 -->
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Descobrir</h4>
-                    <ul class="space-y-3 text-sm">
-                        <li><a href="#rotas" class="hover:text-primary-400 transition-colors">Rotas Solidárias</a></li>
-                        <li><a href="#feiras" class="hover:text-primary-400 transition-colors">Calendário de Feiras</a></li>
-                        <li><a href="#saude-mental" class="hover:text-primary-400 transition-colors">Blog sobre Saúde Mental</a></li>
-                        <li><a href="#" class="hover:text-primary-400 transition-colors">Comunidade</a></li>
-                    </ul>
-                </div>
-
-                <!-- Links 2 -->
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Apoiar</h4>
-                    <ul class="space-y-3 text-sm">
-                        <li><a href="#" class="hover:text-primary-400 transition-colors">Cadastrar um Projeto</a></li>
-                        <li><a href="#" class="hover:text-primary-400 transition-colors">Seja um Voluntário</a></li>
-                        <li><a href="#" class="hover:text-primary-400 transition-colors">Doações</a></li>
-                        <li><a href="#" class="hover:text-primary-400 transition-colors">Parcerias para Empresas</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contato -->
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Fale Conosco</h4>
-                    <ul class="space-y-3 text-sm">
-                        <li class="flex items-center gap-2"><i class="ph ph-envelope"></i> contato@liberrotas.org</li>
-                        <li class="flex items-center gap-2"><i class="ph ph-phone"></i> (11) 99999-0000</li>
-                        <li class="flex items-center gap-2 text-stone-500 mt-4">Precisando de ajuda emocional agora? Ligue 188 (CVV).</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-stone-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-stone-500">
-                <p>&copy; 2026 LiberRotas. Desenvolvido com propósito.</p>
-                <p class="mt-2 md:mt-0 flex items-center gap-1">Feito com <i class="ph-fill ph-heart text-earth-500"></i> para a humanidade.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- JavaScript Interactions -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Mobile Menu Toggle ---
-            const btn = document.getElementById('mobile-menu-btn');
-            const menu = document.getElementById('mobile-menu');
-            const icon = document.getElementById('menu-icon');
-            const links = document.querySelectorAll('.mobile-link');
-
-            btn.addEventListener('click', () => {
-                menu.classList.toggle('hidden');
-                if (menu.classList.contains('hidden')) {
-                    icon.classList.remove('ph-x');
-                    icon.classList.add('ph-list');
-                } else {
-                    icon.classList.remove('ph-list');
-                    icon.classList.add('ph-x');
-                }
-            });
-
-            links.forEach(link => {
-                link.addEventListener('click', () => {
-                    menu.classList.add('hidden');
-                    icon.classList.remove('ph-x');
-                    icon.classList.add('ph-list');
-                });
-            });
-
-            // --- Scroll Animations ---
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animationPlayState = 'running';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.fade-in-up').forEach((el) => {
-                el.style.animationPlayState = 'paused';
-                observer.observe(el);
-            });
-        });
-    </script>
 </body>
-</html>
