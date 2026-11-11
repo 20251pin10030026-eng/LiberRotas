@@ -1,0 +1,34 @@
+digraph G {
+ graph [rankdir=TB, bgcolor="white", pad="0.45", nodesep="0.42", ranksep="0.70", labelloc=t, labeljust=l, label="DER - recorte relacional do backend\nLiberRotas | Modelagem documentada | 11/11/2026", fontname="DejaVu Sans", fontsize=19, fontcolor="#113047", splines=polyline, ranksep="0.90", nodesep="0.38"];
+ node [fontname="DejaVu Sans", fontsize=11, style="rounded,filled", penwidth=1.2, color="#7E94A3", fillcolor="#F8FAFC", fontcolor="#113047", margin="0.17,0.11"];
+ edge [fontname="DejaVu Sans", fontsize=9, color="#7E94A3", arrowsize=.66, fontcolor="#113047"];
+ node [shape=record, fontname="DejaVu Sans", fontsize=10, color="#7EADB7", fillcolor="#F8FAFC", style="rounded,filled", margin="0.12,0.10"];
+ access [label="{access_accounts|PK firebase_uid\lrole\lstatus\l}",fillcolor="#E8EFF7"];
+ permissions [label="{account_permissions|PK (firebase_uid, permission)\lFK firebase_uid\lpermission\l}"];
+ merchants [label="{merchant_accounts|PK firebase_uid\lestablishment_id (UNIQUE)\lstatus\l}",fillcolor="#E8EFF7"];
+ products [label="{products|PK product_id\lFK merchant_uid\lprice_minor\lstock_quantity\l}"];
+ offers [label="{live_offers|PK offer_id\lFK product_id / merchant_uid\lmaximum_redemptions\lexpires_at\l}"];
+ redemption [label="{coupon_redemptions|PK redemption_id\lFK offer_id\lFK device_key_id\lFK operation_id\l}"];
+ institutions [label="{institutional_profiles|PK/FK firebase_uid\lname\lcity\l}",fillcolor="#E8EFF7"];
+ groups [label="{institution_groups|PK group_id\lFK owner_uid\lstatus\l}"];
+ members [label="{institution_group_memberships|PK membership_id\lFK group_id / merchant_uid\lstatus\l}"];
+ conv [label="{private_conversations|PK conversation_id\lkind\lcreated_by_uid\l}",fillcolor="#E8EFF7"];
+ msg [label="{private_messages|PK message_id\lFK conversation_id\lFK sender_uid\l}"];
+ grants [label="{institution_funded_events|PK event_id\lFK owner_uid / group_id\lbudget_amount_minor\lstatus\l}"];
+ edge [fontsize=9, color="#7E94A3"];
+ access -> permissions [label="1:N"];
+ merchants -> products [label="1:N"];
+ merchants -> offers [label="1:N"];
+ products -> offers [label="1:N"];
+ offers -> redemption [label="1:N"];
+ access -> institutions [label="1:0..1"];
+ institutions -> groups [label="1:N"];
+ groups -> members [label="1:N"];
+ merchants -> members [label="1:N"];
+ groups -> grants [label="1:N"];
+ institutions -> grants [label="1:N"];
+ access -> conv [label="criador"];
+ conv -> msg [label="1:N"];
+ access -> msg [label="remetente"];
+ labelloc=b; labeljust=l;
+ }

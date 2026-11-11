@@ -1,0 +1,39 @@
+digraph G {
+ graph [rankdir=LR, bgcolor="white", pad="0.45", nodesep="0.42", ranksep="0.70", labelloc=t, labeljust=l, label="BPMN simplificado - campanha institucional\nLiberRotas | Modelagem documentada | 11/11/2026", fontname="DejaVu Sans", fontsize=19, fontcolor="#113047", splines=polyline, ranksep="0.38", nodesep="0.28"];
+ node [fontname="DejaVu Sans", fontsize=11, style="rounded,filled", penwidth=1.2, color="#7E94A3", fillcolor="#F8FAFC", fontcolor="#113047", margin="0.17,0.11"];
+ edge [fontname="DejaVu Sans", fontsize=9, color="#7E94A3", arrowsize=.66, fontcolor="#113047"];
+
+ compound=true;
+ subgraph cluster_instituicao { label="Raia · Instituição";style="rounded,filled"; color="#90B9BB";fillcolor="#EAF4F4";
+  inicio [shape=circle,label="Início", fillcolor="#D0EEEB"];
+  planejar [label="Criar campanha
+e definir orçamento"];
+  publicar [label="Ativar evento
+institucional"];
+  avaliar [label="Conferir relatório
+e encerrar evento"];
+ }
+ subgraph cluster_empreendedor {label="Raia · Empreendedor";style="rounded,filled";color="#A6BDD0";fillcolor="#E8EFF7";
+  convite [label="Aceitar convite
+para grupo"];
+  estoque [label="Disponibilizar produto
+e validar resgate"];
+ }
+ subgraph cluster_visitante {label="Raia · Visitante";style="rounded,filled";color="#C4B4A0";fillcolor="#FFF8ED";
+  descobrir [label="Consultar feira
+e oferta"];
+  usar [label="Ler QR e
+solicitar cupom"];
+ }
+ subgraph cluster_api {label="Raia · Sistema";style="rounded,filled";color="#A9BFC0";fillcolor="#F2F6F6";
+  verificar [shape=diamond, label="Válido?",fillcolor="#F4E8CD"];
+  registrar [label="Registrar resgate
+e atualizar limites"];
+  negar [label="Negar operação
+e registrar evento",fillcolor="#F9E6E6"];
+  fim [shape=doublecircle,label="Fim",fillcolor="#D0EEEB"];
+ }
+ inicio->planejar->convite->publicar->descobrir->usar->verificar;
+ verificar->estoque [label="sim"]; estoque->registrar->avaliar->fim;
+ verificar->negar [label="não"]; negar->fim;
+ }

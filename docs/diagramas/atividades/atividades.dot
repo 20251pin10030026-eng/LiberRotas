@@ -1,0 +1,32 @@
+digraph G {
+ graph [rankdir=TB, bgcolor="white", pad="0.45", nodesep="0.42", ranksep="0.70", labelloc=t, labeljust=l, label="Atividades - utilização de cupom por QR Code\nLiberRotas | Modelagem documentada | 11/11/2026", fontname="DejaVu Sans", fontsize=19, fontcolor="#113047", splines=polyline, ranksep="0.36", nodesep="0.34"];
+ node [fontname="DejaVu Sans", fontsize=11, style="rounded,filled", penwidth=1.2, color="#7E94A3", fillcolor="#F8FAFC", fontcolor="#113047", margin="0.17,0.11"];
+ edge [fontname="DejaVu Sans", fontsize=9, color="#7E94A3", arrowsize=.66, fontcolor="#113047"];
+
+ node [shape=box,fillcolor="#F8FAFC",color="#8CA7B7", fontsize=11];
+ inicio [shape=circle, label="",width=.20, height=.20,fillcolor="#067F84",color="#067F84"];
+ escolher [label="Visitante escolhe oferta
+e inicia a leitura do QR"];
+ validar [label="Aplicativo envia pedido
+de validação à API"];
+ checa [shape=diamond, label="Sessão, regras e
+oferta válidas?",fillcolor="#F4E8CD"];
+ rejeita [label="Exibir impedimento
+sem registrar resgate",fillcolor="#FCE8E8"];
+ confirma [label="Empreendedor confirma
+a operação autorizada"];
+ atomic [label="Backend registra resgate em
+transação e verifica anti-replay"];
+ ok [shape=diamond,label="Transação
+confirmada?",fillcolor="#F4E8CD"];
+ sucesso [label="Atualizar saldo/estoque
+e exibir confirmação",fillcolor="#EAF4F4"];
+ falha [label="Informar falha sem
+duplicar lançamento",fillcolor="#FCE8E8"];
+ fim [shape=doublecircle,label="",width=.22,height=.22,fillcolor="#067F84",color="#067F84"];
+ inicio->escolher->validar->checa;
+ checa->rejeita [label="não"]; rejeita->fim;
+ checa->confirma [label="sim"]; confirma->atomic->ok;
+ ok->sucesso [label="sim"]; ok->falha [label="não"];
+ sucesso->fim; falha->fim;
+ }

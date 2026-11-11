@@ -1,0 +1,25 @@
+digraph G {
+ graph [rankdir=TB, bgcolor="white", pad="0.45", nodesep="0.42", ranksep="0.70", labelloc=t, labeljust=l, label="Instâncias - cenário ilustrativo sem dados reais\nLiberRotas | Modelagem documentada | 11/11/2026", fontname="DejaVu Sans", fontsize=19, fontcolor="#113047", splines=polyline, ];
+ node [fontname="DejaVu Sans", fontsize=11, style="rounded,filled", penwidth=1.2, color="#7E94A3", fillcolor="#F8FAFC", fontcolor="#113047", margin="0.17,0.11"];
+ edge [fontname="DejaVu Sans", fontsize=9, color="#7E94A3", arrowsize=.66, fontcolor="#113047"];
+
+ node [shape=record,fillcolor="#EAF4F4",color="#83B4B1"];
+ user [label="{visitante: Conta|uid=visitante-demo\lperfil=visitor\l}"];
+ seller [label="{artesa: Empreendedor|uid=empreendedor-demo\lestabelecimento=Ateliê Exemplo\l}"];
+ product [label="{produto01: Produto|id=PROD-DEMO0001\lpreço=R$ 40,00\lestoque=8\l}"];
+ offer [label="{oferta01: Oferta|id=OFFER-DEMO00000001\lstatus=ATIVA\l}"];
+ redeem [label="{resgate01: Resgate|situação=REDEEMED\lcomprador=visitante-demo\l}"];
+ institution [label="{instituicao01: Instituição|nome=Rede Exemplo\l}"];
+ group [label="{grupo01: Grupo|nome=Feira Exemplo\l}"];
+ conversation [label="{conversa01: Conversa|tipo=DIRECT\l}"];
+ message [label="{mensagem01: Mensagem|texto=Olá, o produto está disponível?\l}"];
+ seller->product [label="anuncia"];
+ product->offer [label="origina"];
+ user->redeem [label="utiliza"];
+ offer->redeem [label="é resgatada em"];
+ institution->group [label="organiza"];
+ group->seller [label="reúne"];
+ user->conversation [label="participa"];
+ seller->conversation [label="participa"];
+ conversation->message [label="contém"];
+ }

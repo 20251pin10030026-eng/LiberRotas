@@ -1,0 +1,33 @@
+digraph G {
+ graph [rankdir=TB, bgcolor="white", pad="0.45", nodesep="0.42", ranksep="0.70", labelloc=t, labeljust=l, label="Arquitetura lógica - implementação e publicação\nLiberRotas | Modelagem documentada | 11/11/2026", fontname="DejaVu Sans", fontsize=19, fontcolor="#113047", splines=polyline, ranksep="0.42", nodesep="0.38"];
+ node [fontname="DejaVu Sans", fontsize=11, style="rounded,filled", penwidth=1.2, color="#7E94A3", fillcolor="#F8FAFC", fontcolor="#113047", margin="0.17,0.11"];
+ edge [fontname="DejaVu Sans", fontsize=9, color="#7E94A3", arrowsize=.66, fontcolor="#113047"];
+
+ node [shape=box,fillcolor="#E8EFF7",color="#A0B9CB"];
+ user [label="Usuário web / mobile"];
+ expo [label="Aplicação React / Expo
+app.liberrotas.com.br"];
+ auth [label="Firebase Authentication
+Identidade e permissões"];
+ api [label="API FastAPI
+Regras comerciais e autorização",fillcolor="#EAF4F4",color="#75B5B7"];
+ pg [label="PostgreSQL
+Dados transacionais
+e trilhas de evidência"];
+ redis [label="Redis
+Anti-replay, desafios
+e idempotência"];
+ security [label="TRQ-BEC (laboratório)
+Validação / decisão / ledger"];
+ static [label="GitHub Pages
+Whitepaper estático",fillcolor="#F4E8CD"];
+ host [label="Computador / servidor local
+Disponibilidade dependente da infraestrutura",fillcolor="#FBEAD5"];
+ user -> expo [label="interface"];
+ expo -> auth [label="autenticação"];
+ expo -> api [label="comandos / token"];
+ api -> auth [style=dashed,label="verificação de identidade"];
+ api -> pg; api -> redis; api -> security;
+ host -> api [style=dotted,arrowhead=none,label="hospedagem atual"];
+ user -> static [style=dashed,label="consulta à documentação"];
+ }

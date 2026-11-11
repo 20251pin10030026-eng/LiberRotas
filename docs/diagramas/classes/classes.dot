@@ -1,0 +1,26 @@
+digraph G {
+ graph [rankdir=TB, bgcolor="white", pad="0.45", nodesep="0.42", ranksep="0.70", labelloc=t, labeljust=l, label="Classes - modelo de domínio de referência\nLiberRotas | Modelagem documentada | 11/11/2026", fontname="DejaVu Sans", fontsize=19, fontcolor="#113047", splines=polyline, ranksep="0.70", nodesep="0.36"];
+ node [fontname="DejaVu Sans", fontsize=11, style="rounded,filled", penwidth=1.2, color="#7E94A3", fillcolor="#F8FAFC", fontcolor="#113047", margin="0.17,0.11"];
+ edge [fontname="DejaVu Sans", fontsize=9, color="#7E94A3", arrowsize=.66, fontcolor="#113047"];
+
+ node [shape=record, fillcolor="#E8EFF7", color="#7DAAB5", fontsize=10];
+ account [label="{Conta|uid: texto\lperfil: texto\lstatus: texto\l}"];
+ merchant [label="{Empreendedor|uid: texto\lestabelecimento: texto\lstatus: texto\l}"];
+ product [label="{Produto|id: texto\ltitulo: texto\lprecoCentavos: inteiro\lestoque: inteiro\l}"];
+ offer [label="{OfertaAoVivo|id: texto\lprodutoId: texto\lvalidade: data/hora\llimiteResgates: inteiro\l}"];
+ redemption [label="{Resgate|id: UUID\lofertaId: texto\lcompradorId: texto\lvalorEconomizado: inteiro\l}"];
+ institution [label="{Instituicao|uid: texto\lnome: texto\l}"];
+ group [label="{GrupoInstitucional|id: texto\lstatus: texto\l}"];
+ membership [label="{VinculoInstitucional|id: texto\lstatus: texto\l}"];
+ conversation [label="{Conversa|id: texto\ltipo: texto\l}"];
+ message [label="{Mensagem|id: texto\lremetenteId: texto\ltexto: texto\l}"];
+ account -> institution [label="0..1", arrowhead=empty,style=dashed];
+ merchant -> product [label="1 -> 0..*",arrowhead=vee];
+ product -> offer [label="1 -> 0..*",arrowhead=vee];
+ offer -> redemption [label="1 -> 0..*",arrowhead=vee];
+ institution -> group [label="1 -> 0..*",arrowhead=vee];
+ group -> membership [label="1 -> 0..*",arrowhead=vee];
+ merchant -> membership [label="1 -> 0..*",arrowhead=vee];
+ conversation -> message [label="1 -> 0..*",arrowhead=vee];
+ account -> message [label="1 -> 0..*",arrowhead=vee];
+ }
