@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://20251pin10030026-eng.github.io/LiberRotas/sitemap.xml
