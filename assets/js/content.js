@@ -16,7 +16,7 @@ window.LIBERROTAS_ASSETS = {
     mensagens: { arquivo: '', alt: 'Comunicação com empreendedor' }
   },
   documentos: {
-    'casos-de-uso': { arquivo: 'docs/diagramas/casos-de-uso/casos_de_uso.jpg', fonte: 'docs/diagramas/casos-de-uso/casos-de-uso.svg' },
+    'casos-de-uso': { arquivo: 'docs/diagramas/casos-de-uso/casos_de_uso.pdf', fonte: 'docs/diagramas/casos-de-uso/casos-de-uso.svg' },
     'entidade-relacionamento': { arquivo: 'docs/diagramas/entidade-relacionamento/entidade-relacionamento.pdf', fonte: 'docs/diagramas/entidade-relacionamento/entidade-relacionamento.svg' },
     instancias: { arquivo: 'docs/diagramas/instancias/instancias.pdf', fonte: 'docs/diagramas/instancias/instancias.svg' },
     atividades: { arquivo: 'docs/diagramas/atividades/atividades.pdf', fonte: 'docs/diagramas/atividades/atividades.svg' },
