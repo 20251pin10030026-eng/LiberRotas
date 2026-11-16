@@ -8,7 +8,7 @@
 */
 window.LIBERROTAS_ASSETS = {
   telas: {
-    inicio: { arquivo: '', alt: 'tela-inicial.png' },
+    inicio: { arquivo: '', alt: 'assets/img/telas/tela-inicial.png' },
     empreendedores: { arquivo: '', alt: 'Catálogo de empreendedores e produtos' },
     rotas: { arquivo: '', alt: 'Mapa de rotas e feiras regionais' },
     cupons: { arquivo: '', alt: 'Página de cupons e benefícios' },
