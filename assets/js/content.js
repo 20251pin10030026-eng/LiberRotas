@@ -13,7 +13,7 @@ window.LIBERROTAS_ASSETS = {
     rotas: { arquivo: 'assets/img/telas/rotas-feiras.png', alt: 'Mapa de rotas e feiras regionais' },
     cupons: { arquivo: 'assets/img/telas/cupons-beneficios.png', alt: 'Página de cupons e benefícios' },
     perfil: { arquivo: 'assets/img/telas/perfil.png', alt: 'Perfil de empreendedor no LiberRotas' },
-    mensagens: { arquivo: '', alt: 'Comunicação com empreendedor' }
+    mensagens: { arquivo: 'assets/img/telas/mensagens.png', alt: 'Comunicação com empreendedor' }
   },
   documentos: {
     'casos-de-uso': { arquivo: 'docs/diagramas/casos-de-uso/casos_de_uso.pdf', fonte: 'docs/diagramas/casos-de-uso/casos-de-uso.svg' },
