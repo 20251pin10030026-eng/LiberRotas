@@ -10,7 +10,7 @@ window.LIBERROTAS_ASSETS = {
   telas: {
     inicio: {  arquivo: 'assets/img/telas/tela-inicial.png', alt: 'Tela inicial da plataforma LiberRotas' },
     empreendedores: { arquivo: 'assets/img/telas/tela-ofertas.png', alt: 'Catálogo de empreendedores e produtos' },
-    rotas: { arquivo: '', alt: 'Mapa de rotas e feiras regionais' },
+    rotas: { arquivo: 'assets/img/telas/rotas-feiras.png', alt: 'Mapa de rotas e feiras regionais' },
     cupons: { arquivo: '', alt: 'Página de cupons e benefícios' },
     perfil: { arquivo: '', alt: 'Perfil de empreendedor no LiberRotas' },
     mensagens: { arquivo: '', alt: 'Comunicação com empreendedor' }
