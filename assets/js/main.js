@@ -142,7 +142,7 @@
     const actions = card.querySelector('.asset-actions');
     if (!actions) return;
     card.classList.add('loaded');
-    if (status) status.textContent = external ? 'Protótipo on-line · acesso externo' : 'Arquivo disponível em PDF';
+    if (status) status.textContent = external ? 'Protótipo on-line · acesso externo';
     const isImage = /\.(png|jpe?g|webp|gif|svg)$/i.test(path);
     if (isImage && preview) {
       const img = document.createElement('img');
